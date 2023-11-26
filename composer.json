@@ -1,0 +1,21 @@
+{
+    "name": "patrick-barreto/http",
+    "description": "This package will create the http service that will create endpoints, recive request and send response",
+    "type": "library",
+    "license": "GPL-3.0-or-later",
+    "author": [
+        {
+            "name": "Patrick Barreto"
+        }
+    ],
+    "minimum-stability": "stable",
+    "autoload": {
+        "psr-4": {
+            "Http\\": "./src"
+        }
+    },
+    "require": {
+        "patrick-barreto/exception": "^1.0",
+        "php":">=7.0"
+    }
+}
