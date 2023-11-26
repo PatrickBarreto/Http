@@ -6,15 +6,15 @@ use Closure;
 
 class Route {
   
-    public static array $post;
+    public static array $post = [];
 
-    public static array $get;
+    public static array $get = [];
 
-    public static array $put;
+    public static array $put = [];
     
-    public static array $patch;
+    public static array $patch = [];
 
-    public static array $delete;
+    public static array $delete = [];
 
     /**
      * This method will prepare a POST route.
