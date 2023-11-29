@@ -5,7 +5,7 @@ This package gonna make for your API projetc all the essential HTTP ressources, 
 
 # How to install
 ```sh 
-composer require patricgit k-barreto/Http
+composer require patrick-barreto/Http
 ```
 
 # How to Use
