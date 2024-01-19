@@ -27,7 +27,6 @@ class Queue {
         $this->namespaceMapping = Middleware::getMiddlewaresMap();
         $this->executionQueue   = array_unique(array_merge(Middleware::getDefaultMiddlewares(), Request::getMatchedRoute()['middlewares']));
         $this->controller       = Request::getMatchedRoute()['controller'];
-        $this->controllersArgs  = Request::getMatchedRoute()['pathParams'];
     }
 
     /**
@@ -40,12 +39,11 @@ class Queue {
         if($this->executionQueue ?? null) {
             $this->queueExec($request);
         }
-        $this->controllersArgs['request'] = $request;
-        $this->RouteControllerExec();
+        $this->RouteControllerExec($request);
     }
 
-    private function RouteControllerExec() {
-        call_user_func_array($this->controller, [$this->controllersArgs]);
+    private function RouteControllerExec(Request $request) {
+        call_user_func_array($this->controller, [$request]);
     }
 
     /**
