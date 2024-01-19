@@ -26,6 +26,7 @@ class Router {
                     'controller' => $route['controller'],
                     'queryStrings' => Request::getQueryStrings()
                 ]);
+                Request::setMatchedRoutePathParam(self::setPathParams($matches));
                 $executionQueue = new Queue;
                 $executionQueue->next(new Request);
             }
@@ -37,7 +38,7 @@ class Router {
      * This method gonna set Dinamic Path Params recived on URI
      *
      * @param array $matches
-     * @return void
+     * @return array
      */
     private static function setPathParams(array $matches) {
         
