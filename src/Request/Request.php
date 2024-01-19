@@ -8,6 +8,7 @@ class Request {
     private static array $headers;
     private static string $route;
     private static array $queryStrings;
+    private static array $pathParams;
     private static array $body;
     private static array $matchedRoute;
     
@@ -26,7 +27,7 @@ class Request {
     public static function setData(){
         self::$method       = $_SERVER['REQUEST_METHOD'];
         self::$headers      = getallheaders();
-        self::$route        = $_REQUEST['route'];
+        self::$route        = ($_REQUEST['route']) ? $_REQUEST['route'] : '/';
         self::$queryStrings = array_slice($_REQUEST, 1, null, true);
         self::$body         = (self::$method == 'POST' || self::$method == 'PUT' || self::$method == 'PATCH') ? [file_get_contents("php://input")] : [];
         self::$body         = (self::$body) ? self::$body : [];
@@ -67,7 +68,7 @@ class Request {
 
 
     /**
-     * This method is responsable to set the query string data.
+     * This method is responsable to get the query string data.
      *
      * @return array
      */
@@ -75,16 +76,50 @@ class Request {
         return self::$queryStrings;
     }
 
+    /**
+     * This method is responsable to get the path params
+     *
+     * @return array
+     */
+    public static function getPathParams() {
+        return self::$pathParams;
+    }
+
 
     /**
      * This method is responsable to return the request Body
      *
-     * @return object
+     * @return array
      */
     public static function getBody() {
-        return json_decode(self::$body[0]);
+        return json_decode(self::$body[0], true);
     }
 
+    /**
+     * This method is responsable to return the request method
+     *
+     * @return array
+     */    
+    public static function getMatchedRoute() {
+        return self::$matchedRoute;
+    }
+    
+
+    /**
+     * This method is responsable to return the request all data method
+     *
+     * @return array
+     */    
+    public static function getAllStaticData() {
+        return [
+            "http-method" => self::$method,
+            "http-headers" => self::$headers,
+            "route-path" => self::$route,
+            "query-string" => self::$queryStrings,
+            "path-param" => self::$pathParams,
+            "body" => self::$body
+        ];
+    }
         
     /**
      * This method is responsable to set the request MatchedRoute
@@ -94,14 +129,14 @@ class Request {
     public static function setMatchedRoute(array $routeData) {
         self::$matchedRoute = $routeData;
     }
-
-     /**
-     * This method is responsable to return the request method
-     *
-     * @return array
+        
+    /**
+     * This method is responsable to set the request MatchedRoute Path Param
+     * @param array $route
+     * @return void
      */    
-    public static function getMatchedRoute() {
-        return self::$matchedRoute;
+    public static function setMatchedRoutePathParam(array $pathParams) {
+        self::$pathParams = $pathParams;
     }
-
+    
 }
