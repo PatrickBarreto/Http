@@ -8,6 +8,7 @@ use Http\Router\Router;
 use Http\Routes\Route;
 use Http\Response\Response;
 use Closure;
+use Http\Cors\Cors;
 
 final class Http {
 
@@ -104,6 +105,31 @@ final class Http {
             $response = (array)$response;
         }
         Response::exec($response, $statusCode, $headers);
+    }
+
+    /**
+     * This method will make CORS config
+     * 
+     * @param array $accessControlAllowOrigin
+     * @param array $accessControlAllowMethods
+     * @param array $accessControlAllowHeaders
+     * @param array $accessControlAllowCredentials
+     * @param array $accessControlExposeHeaders
+     * @param array $accessControlMaxAge
+     * 
+     * @return void
+     */
+    public static function CORS(array $accessControlAllowOrigin = ['*'], 
+                                array $accessControlAllowMethods = ['POST', 'GET', 'PUT', 'PATCH', 'DELETE', 'OPTIONS'],
+                                array $accessControlAllowHeaders = ['Content-Type'],
+                                bool $accessControlAllowCredentials = false,
+                                array $accessControlExposeHeaders = ['Content-Type'],
+                                int $accessControlMaxAge = 86400){
+
+        Cors::enableCORS(
+                        $accessControlAllowOrigin, $accessControlAllowMethods, $accessControlAllowHeaders, 
+                        $accessControlAllowCredentials, $accessControlExposeHeaders, $accessControlMaxAge
+                        );
     }
 
     /**
