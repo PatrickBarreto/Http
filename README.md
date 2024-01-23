@@ -158,6 +158,21 @@ public static function getBody()
     ```
 ---
 
+# CORS
+
+To configurate your CORS policies, you can use CORS Method.
+
+```php
+Http::CORS(
+            array $accessControlAllowOrigin = ['*'], 
+            array $accessControlAllowMethods = ['POST', 'GET', 'PUT', 'PATCH', 'DELETE', 'OPTIONS'],
+            array $accessControlAllowHeaders = ['Content-Type'],
+            bool $accessControlAllowCredentials = false,
+            array $accessControlExposeHeaders = ['Content-Type'],
+            int $accessControlMaxAge = 86400 
+        );
+```
+***Important:*** This method will make a global config CORS for all routes. If you need any more datailed configuration, you can create a Middleware and change an specific headers.
 
 
 # **EXEMPLES**:
@@ -252,6 +267,8 @@ Http::get('/users', function($request) {
     require_once "./vendor/autoload.php"; //autoload PSR-4
     require_once "./MiddlewaresMap.php";
     require_once "./Routes.php";
+
+    Http\Http::CORS();
 
     //if you need to put anything more in this system part, put here.
 
