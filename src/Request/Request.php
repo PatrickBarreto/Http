@@ -92,7 +92,7 @@ class Request {
      * @return array
      */
     public static function getBody() {
-        return json_decode(self::$body[0], true);
+        return json_decode(self::$body[0]);
     }
 
     /**
