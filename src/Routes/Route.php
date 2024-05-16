@@ -102,6 +102,32 @@ class Route {
         ];
     }
 
+
+    /**
+     * This method will require to system all routes files from user app. 
+     * 
+     * @param string $dirRoutesName
+     * 
+     * @return bollean
+     */
+    public static function loadRoutesOnSystemFromPath(string $dirRoutesName) {
+        if(is_dir($dirRoutesName)){
+            $files = scandir($dirRoutesName);
+            foreach ($files as $value) {
+                $path = realpath($dirRoutesName . DIRECTORY_SEPARATOR . $value);
+                if (!is_dir($path)) {
+                    if (pathinfo($path, PATHINFO_EXTENSION) === 'php') {
+                        require_once $path;
+                    }
+                } else if ($value != "." && $value != "..") {
+                    self::loadRoutesOnSystemFromPath($path, $results);
+                }
+            }
+            return true;
+        }
+
+    }
+
     /**
      * This method will prepare a POST route.
      * 

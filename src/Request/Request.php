@@ -73,7 +73,7 @@ class Request {
     /**
      * This method is responsable to get the query string data.
      *
-     * @return array
+     * @return mixed
      */
     public static function getQueryStrings(string $paramName = '') {
         $queryString = self::$queryStrings;
@@ -90,7 +90,7 @@ class Request {
     /**
      * This method is responsable to get the path params
      *
-     * @return array
+     * @return mixed
      */
     public static function getPathParams(string $paramName = '') {
         $pathParam = self::$pathParams;
