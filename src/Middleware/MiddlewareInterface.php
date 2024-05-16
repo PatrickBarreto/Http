@@ -3,5 +3,5 @@
 namespace Http\Middleware;
 
 interface MiddlewareInterface {
-    public function handler($reques, $callback);
+    public function handler($$request, $callback);
 }
