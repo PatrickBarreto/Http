@@ -256,6 +256,12 @@ Http::get('/users', function($request) {
 ['Auth']);
 ```
 
+To load all your routes to system you can use the 
+```php
+    Http::loadRoutesFromPath(string $dirRoutesName);
+```
+It will load all files from an path. Use it it before run app.
+
 ---
 
 # index.php
@@ -266,10 +272,11 @@ Http::get('/users', function($request) {
 
     require_once "./vendor/autoload.php"; //autoload PSR-4
     require_once "./MiddlewaresMap.php";
-    require_once "./Routes.php";
 
     Http\Http::CORS();
 
+    Http::loadRoutesFromPath('./Routes/')
+    
     //if you need to put anything more in this system part, put here.
 
     Http::run();
