@@ -133,6 +133,15 @@ final class Http {
     }
 
     /**
+     * This method will load on system execution all system routes from user app. This method will manipulate the Route method to this.
+     *
+     * @return void
+     * */
+    public static function loadRoutesFromPath(string $dirRoutesName) {
+        Route::loadRoutesOnSystemFromPath($dirRoutesName);
+    }
+
+    /**
      * This method will run the app, finding the matched between the requested route and the list of routes controller. 
      * 
      * @return void
