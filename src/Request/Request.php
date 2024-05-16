@@ -2,6 +2,9 @@
 
 namespace Http\Request;
 
+use Exception\Exception;
+use stdClass;
+
 class Request {
     
     private static string $method;
@@ -72,8 +75,16 @@ class Request {
      *
      * @return array
      */
-    public static function getQueryStrings() {
-        return self::$queryStrings;
+    public static function getQueryStrings(string $paramName = '') {
+        $queryString = self::$queryStrings;
+        if(strlen($paramName) > 0){
+            $queryString = self::$queryStrings[$paramName];
+            if(is_null($queryString)){
+                Exception::throw("Inform and valid path name", 400, ["Options" => array_keys(self::$queryStrings)]);
+            }
+        
+            return $queryString;
+        }
     }
 
     /**
@@ -81,18 +92,31 @@ class Request {
      *
      * @return array
      */
-    public static function getPathParams() {
-        return self::$pathParams;
+    public static function getPathParams(string $paramName = '') {
+        $pathParam = self::$pathParams;
+        if(strlen($paramName) > 0){
+            $pathParam = self::$pathParams[$paramName];
+            if(is_null($pathParam)){
+                Exception::throw("Inform and valid path name", 400, ["Options" => array_keys(self::$pathParams)]);
+            }
+        }
+        
+        return $pathParam;
     }
 
 
     /**
      * This method is responsable to return the request Body
      *
-     * @return array
+     * @return stdClass
      */
     public static function getBody() {
-        return json_decode(self::$body[0]);
+        $body = new stdClass;
+        $bodyDecoded = json_decode(self::$body[0]);
+        if($bodyDecoded){
+            $body = $bodyDecoded;
+        } 
+        return $body;
     }
 
     /**
