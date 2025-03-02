@@ -9,7 +9,7 @@ use Http\Router\Queue\Queue;
 
 
 class Router {
-    
+
     /**
      * This method gonna find the route data that match with the request regex URI
      *
