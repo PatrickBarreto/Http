@@ -30,7 +30,7 @@ class Request {
     public static function setData(){
         self::$method       = $_SERVER['REQUEST_METHOD'];
         self::$headers      = getallheaders();
-        self::$route        = ($_REQUEST['route']) ? $_REQUEST['route'] : '/';
+        self::$route        = ($_SERVER['REQUEST_URI']) ? $_SERVER['REQUEST_URI'] : '/';
         self::$queryStrings = array_slice($_REQUEST, 1, null, true);
         self::$body         = (self::$method == 'POST' || self::$method == 'PUT' || self::$method == 'PATCH') ? [file_get_contents("php://input")] : [];
         self::$body         = (self::$body) ? self::$body : [];
