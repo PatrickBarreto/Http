@@ -120,7 +120,7 @@ class Route {
                         require_once $path;
                     }
                 } else if ($value != "." && $value != "..") {
-                    self::loadRoutesOnSystemFromPath($path, $results);
+                    self::loadRoutesOnSystemFromPath($path);
                 }
             }
             return true;
